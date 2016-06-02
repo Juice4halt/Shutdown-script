@@ -11,6 +11,15 @@
 #copyright	 :GNU GPL v3.0	
 #==============================================================================
 
+#add RTC device
+#load modules
+modprobe i2c-dev
+modprobe rtc-pcf85063
+#add juice4halt RTC i2c device
+echo pcf85063 0x51 > /sys/class/i2c-adapter/i2c-1/new_device
+#get time from  RTC
+hwclock --hctosys
+
 #create directory for working with GPIO and wait
 echo "25" > /sys/class/gpio/export
 sleep 0.2s
